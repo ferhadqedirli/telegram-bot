@@ -2,6 +2,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import util.MyUtil;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,19 +31,22 @@ public class MediaBot extends TelegramLongPollingBot {
                 int index = file.getFilePath().lastIndexOf(".");
                 String fileExtension = file.getFilePath().substring(index);
                 String[] captions = message.getCaption().trim().split("#");
-                captureName = captions[0].trim() + "." + fileExtension;
+                captureName = captions[0].trim() + fileExtension;
                 URL url = new URL("https://api.telegram.org/file/bot" + getBotToken() + "/" + file.getFilePath());
                 ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-                FileOutputStream fos = new FileOutputStream("D:\\img\\" + captureName);
+                String path = MyUtil.getPath(message.getCaption());
+                FileOutputStream fos = new FileOutputStream(path + captureName);
                 fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                 fos.write(url.openConnection().getInputStream().readAllBytes());
                 successfully++;
-                System.out.println("File downloaded successfully : " + captureName + ", count : " + successfully);
+                System.out.println("File downloaded successfully : " + captureName + ", count : " + successfully
+                        + ", path : " + path);
                 fos.close();
                 rbc.close();
             } catch (TelegramApiException | IOException e) {
                 failed++;
-                System.out.println("Exception occurred when downloading file : " + captureName + ", count : " + failed);
+                System.out.println("Exception occurred when downloading file : " + captureName + ", count : " + failed
+                        + ", path : " + MyUtil.getPath(message.getCaption()));
                 e.printStackTrace();
             }
         }
