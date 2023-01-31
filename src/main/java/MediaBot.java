@@ -1,6 +1,5 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -14,43 +13,38 @@ import java.util.List;
 
 public class MediaBot extends TelegramLongPollingBot {
 
+    private static short successfully = 0;
+    private static short failed = 0;
+
     @Override
     public void onUpdateReceived(Update update) {
-        System.out.println(update.getMessage().getText());
         if (update.hasMessage() && update.getMessage().hasPhoto()) {
             Message message = update.getMessage();
-//            String fileId = message.getPhoto().get(0).getFileId();
-            String captureName = message.getCaption().trim().substring(0, 21) + ".jpeg";
             List<PhotoSize> photos = message.getPhoto();
             PhotoSize largestPhoto = photos.stream()
                     .max(Comparator.comparingInt(PhotoSize::getFileSize))
                     .orElse(photos.get(photos.size() - 1));
+            String captureName = null;
             try {
-//                Document document = message.getDocument();
                 File file = execute(new GetFile(largestPhoto.getFileId()));
-                System.out.println(file.getFileSize());
+                int index = file.getFilePath().lastIndexOf(".");
+                String fileExtension = file.getFilePath().substring(index);
+                String[] captions = message.getCaption().trim().split("#");
+                captureName = captions[0].trim() + "." + fileExtension;
                 URL url = new URL("https://api.telegram.org/file/bot" + getBotToken() + "/" + file.getFilePath());
                 ReadableByteChannel rbc = Channels.newChannel(url.openStream());
                 FileOutputStream fos = new FileOutputStream("D:\\img\\" + captureName);
                 fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                 fos.write(url.openConnection().getInputStream().readAllBytes());
+                successfully++;
+                System.out.println("File downloaded successfully : " + captureName + ", count : " + successfully);
                 fos.close();
                 rbc.close();
             } catch (TelegramApiException | IOException e) {
+                failed++;
+                System.out.println("Exception occurred when downloading file : " + captureName + ", count : " + failed);
                 e.printStackTrace();
             }
-//            sendMessage(message.getChatId().toString(), "Image saved as " + captureName);
-        }
-    }
-
-    private void sendMessage(String chatId, String text) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(text);
-        try {
-            execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
         }
     }
 
