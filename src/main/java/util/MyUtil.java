@@ -1,23 +1,18 @@
 package util;
 
+import java.util.Arrays;
+
 public class MyUtil {
     public static String getPath(String caption) {
-        String[] captions = caption.trim().toLowerCase().split("#");
+        String[] hashTags = getHashTags(caption.toLowerCase());
         String path = "D:\\PRO STUDIO\\";
-        if (captions.length > 2) {
-            String hashTag = captions[2].split("\n")[0].split(" ")[0].trim();
+
+        for (String hashTag : hashTags) {
             String subPath = getSubPath(hashTag);
             if (subPath != null) {
                 path += subPath;
-            } else {
-                String hashTag1 = captions[1].split("\n")[0].split(" ")[0].trim();
-                String subPath1 = getSubPath(hashTag1);
-                path += subPath1;
+                break;
             }
-        } else {
-            String hashTag1 = captions[1].split("\n")[0].split(" ")[0].trim();
-            String subPath1 = getSubPath(hashTag1);
-            path += subPath1;
         }
 
         return path;
@@ -26,613 +21,574 @@ public class MyUtil {
     private static String getSubPath(String hashTag) {
         String subPath = null;
         switch (hashTag) {
-            case "3dпанель":
+            case "#3dпанель":
                 subPath = "декор\\3Dпанель\\";
                 break;
-            case "шторы":
+            case "#шторы":
                 subPath = "декор\\шторы\\";
                 break;
-            case "другиепредметыинтерьера":
+            case "#другиепредметыинтерьера":
                 subPath = "декор\\другиепредметыинтерьера\\";
                 break;
-            case "аффреско":
+            case "#аффреско":
                 subPath = "декор\\аффреско\\";
                 break;
-            case "багеты":
+            case "#багеты":
                 subPath = "декор\\багеты\\";
                 break;
-            case "вазы":
+            case "#вазы":
                 subPath = "декор\\вазы\\";
                 break;
-            case "декор":
-                subPath = "декор\\декор\\";
-                break;
-            case "декоративныйнабор":
+            case "#декоративныйнабор":
                 subPath = "декор\\декоративныйнабор\\";
                 break;
-            case "жалюзи":
+            case "#жалюзи":
                 subPath = "декор\\жалюзи\\";
                 break;
-            case "зеркало":
+            case "#зеркало":
                 subPath = "декор\\зеркало\\";
                 break;
-            case "картины":
+            case "#картины":
                 subPath = "декор\\картины\\";
                 break;
-            case "книги":
+            case "#книги":
                 subPath = "декор\\книги\\";
                 break;
-            case "ковры":
+            case "#ковры":
                 subPath = "декор\\ковры\\";
                 break;
-            case "лепнина":
+            case "#лепнина":
                 subPath = "декор\\лепнина\\";
                 break;
-            case "молдинг":
+            case "#молдинг":
                 subPath = "декор\\молдинг\\";
                 break;
-            case "новогоднийдекор":
+            case "#новогоднийдекор":
                 subPath = "декор\\новогоднийдекор\\";
                 break;
-            case "обувь":
+            case "#обувь":
                 subPath = "декор\\обувь\\";
                 break;
-            case "одежда":
+            case "#одежда":
                 subPath = "декор\\одежда\\";
                 break;
-            case "подушки":
+            case "#подушки":
                 subPath = "декор\\подушки\\";
                 break;
-            case "римскиешторы":
+            case "#римскиешторы":
                 subPath = "декор\\римскиешторы\\";
                 break;
-            case "скульптура":
+            case "#скульптура":
                 subPath = "декор\\скульптура\\";
                 break;
-            case "детская":
-                subPath = "детская\\детская\\";
-                break;
-            case "детскаямебель":
+            case "#детскаямебель":
                 subPath = "детская\\детскаямебель\\";
                 break;
-            case "игрушки":
+            case "#игрушки":
                 subPath = "детская\\игрушки\\";
                 break;
-            case "шалаш":
+            case "#шалаш":
                 subPath = "детская\\шалаш\\";
                 break;
-            case "биокамин":
+            case "#биокамин":
                 subPath = "другиемодели\\биокамин\\";
                 break;
-            case "витрина":
+            case "#витрина":
                 subPath = "другиемодели\\витрина\\";
                 break;
-            case "двери":
+            case "#двери":
                 subPath = "другиемодели\\двери\\";
                 break;
-            case "дверныеручки":
+            case "#дверныеручки":
                 subPath = "другиемодели\\дверныеручки\\";
                 break;
-            case "другиемодели":
-                subPath = "другиемодели\\другиемодели\\";
-                break;
-            case "животные":
+            case "#животные":
                 subPath = "другиемодели\\животные\\";
                 break;
-            case "камин":
+            case "#камин":
                 subPath = "другиемодели\\камин\\";
                 break;
-            case "конвектор":
+            case "#конвектор":
                 subPath = "другиемодели\\конвектор\\";
                 break;
-            case "крючки":
+            case "#крючки":
                 subPath = "другиемодели\\крючки\\";
                 break;
-            case "лестницы":
+            case "#лестницы":
                 subPath = "другиемодели\\лестницы\\";
                 break;
-            case "люди":
+            case "#люди":
                 subPath = "другиемодели\\люди\\";
                 break;
-            case "магазин":
+            case "#магазин":
                 subPath = "другиемодели\\магазин\\";
                 break;
-            case "медицина":
+            case "#медицина":
                 subPath = "другиемодели\\медицина\\";
                 break;
-            case "музыкальныеинструменты":
+            case "#музыкальныеинструменты":
                 subPath = "другиемодели\\музыкальныеинструменты\\";
                 break;
-            case "окна":
+            case "#окна":
                 subPath = "другиемодели\\окна\\";
                 break;
-            case "перегородка":
+            case "#перегородка":
                 subPath = "другиемодели\\перегородка\\";
                 break;
-            case "печь":
+            case "#печь":
                 subPath = "другиемодели\\печь\\";
                 break;
-            case "потолок":
+            case "#потолок":
                 subPath = "другиемодели\\потолок\\";
                 break;
-            case "радиатор":
+            case "#радиатор":
                 subPath = "другиемодели\\радиатор\\";
                 break;
-            case "раздвижныедвери":
+            case "#раздвижныедвери":
                 subPath = "другиемодели\\раздвижныедвери\\";
                 break;
-//            case "разное":
-//                return "другиемодели\\разное\\";
-//                break;
-            case "ресепшен":
+            case "#ресепшен":
                 subPath = "другиемодели\\ресепшен\\";
                 break;
-            case "ресторан":
+            case "#ресторан":
                 subPath = "другиемодели\\ресторан\\";
                 break;
-            case "салонкрасоты":
+            case "#салонкрасоты":
                 subPath = "другиемодели\\салонкрасоты\\";
                 break;
-            case "спорт":
+            case "#спорт":
                 subPath = "другиемодели\\спорт\\";
                 break;
-            case "транспорт":
+            case "#транспорт":
                 subPath = "другиемодели\\транспорт\\";
                 break;
-            case "фурнитура":
+            case "#фурнитура":
                 subPath = "другиемодели\\фурнитура\\";
                 break;
-            case "электрика":
+            case "#электрика":
                 subPath = "другиемодели\\электрика\\";
                 break;
-            case "кухни":
-                subPath = "кухни\\кухни\\";
-                break;
-            case "вытяжка":
+            case "#вытяжка":
                 subPath = "кухни\\вытяжка\\";
                 break;
-            case "декордлякухни":
+            case "#декордлякухни":
                 subPath = "кухни\\декордлякухни\\";
                 break;
-            case "духовка":
+            case "#духовка":
                 subPath = "кухни\\духовка\\";
                 break;
-            case "еданапитки":
+            case "#еданапитки":
                 subPath = "кухни\\еданапитки\\";
                 break;
-            case "кухня":
+            case "#кухня":
                 subPath = "кухни\\кухня\\";
                 break;
-            case "кухоннаятехника":
+            case "#кухоннаятехника":
                 subPath = "кухни\\кухоннаятехника\\";
                 break;
-            case "мойка":
+            case "#мойка":
                 subPath = "кухни\\мойка\\";
                 break;
-            case "посуда":
+            case "#посуда":
                 subPath = "кухни\\посуда\\";
                 break;
-//            case "смеситель":
-//                return "кухни\\смеситель\\";
-//                break;
-            case "фрукты":
+            case "#фрукты":
                 subPath = "кухни\\фрукты\\";
                 break;
-            case "холодильник":
+            case "#холодильник":
                 subPath = "кухни\\холодильник\\";
                 break;
-            case "банкетка":
+            case "#банкетка":
                 subPath = "мебель\\банкетка\\";
                 break;
-            case "барныйстул":
+            case "#барныйстул":
                 subPath = "мебель\\барныйстул\\";
                 break;
-            case "гардероб":
+            case "#гардероб":
                 subPath = "мебель\\гардероб\\";
                 break;
-            case "диван":
+            case "#диван":
                 subPath = "мебель\\диван\\";
                 break;
-            case "журнальныйстол":
+            case "#журнальныйстол":
                 subPath = "мебель\\журнальныйстол\\";
                 break;
-            case "комод":
+            case "#комод":
                 subPath = "мебель\\комод\\";
                 break;
-            case "консоль":
+            case "#консоль":
                 subPath = "мебель\\консоль\\";
                 break;
-            case "кресло":
+            case "#кресло":
                 subPath = "мебель\\кресло\\";
                 break;
-            case "кресломешок":
+            case "#кресломешок":
                 subPath = "мебель\\кресломешок\\";
                 break;
-            case "мебель":
-                subPath = "мебель\\мебель\\";
-                break;
-            case "офис":
+            case "#офис":
                 subPath = "мебель\\офис\\";
                 break;
-            case "офиснаямебель":
+            case "#офиснаямебель":
                 subPath = "мебель\\офиснаямебель\\";
                 break;
-            case "подвесноекресло":
+            case "#подвесноекресло":
                 subPath = "мебель\\подвесноекресло\\";
                 break;
-            case "прихожая":
+            case "#прихожая":
                 subPath = "мебель\\прихожая\\";
                 break;
-            case "пуф":
+            case "#пуф":
                 subPath = "мебель\\пуф\\";
                 break;
-            case "рабочееместо":
+            case "#рабочееместо":
                 subPath = "мебель\\рабочееместо\\";
                 break;
-            case "софа":
+            case "#софа":
                 subPath = "мебель\\софа\\";
                 break;
-            case "стеллаж":
+            case "#стеллаж":
                 subPath = "мебель\\стеллаж\\";
                 break;
-            case "столик":
+            case "#столик":
                 subPath = "мебель\\столик\\";
                 break;
-            case "столстул":
+            case "#столстул":
                 subPath = "мебель\\столстул\\";
                 break;
-            case "столы":
+            case "#столы":
                 subPath = "мебель\\столы\\";
                 break;
-            case "стул":
+            case "#стул":
                 subPath = "мебель\\стул\\";
                 break;
-            case "стулья":
+            case "#стулья":
                 subPath = "мебель\\стулья\\";
                 break;
-            case "твстенка":
+            case "#твстенка":
                 subPath = "мебель\\твстенка\\";
                 break;
-            case "туалетныйстолик":
+            case "#туалетныйстолик":
                 subPath = "мебель\\туалетныйстолик\\";
                 break;
-            case "тумба":
+            case "#тумба":
                 subPath = "мебель\\тумба\\";
                 break;
-            case "шкафы":
+            case "#шкафы":
                 subPath = "мебель\\шкафы\\";
                 break;
-            case "кровать":
+            case "#кровать":
                 subPath = "мебель\\кровать\\";
                 break;
-            case "освещение":
-                subPath = "освещение\\освещение\\";
-                break;
-            case "бра":
+            case "#бра":
                 subPath = "освещение\\бра\\";
                 break;
-            case "встроенный":
+            case "#встроенный":
                 subPath = "освещение\\встроенный\\";
                 break;
-            case "гирлянда":
+            case "#гирлянда":
                 subPath = "освещение\\гирлянда\\";
                 break;
-            case "люстры":
+            case "#люстры":
                 subPath = "освещение\\люстры\\";
                 break;
-            case "напольный":
+            case "#напольный":
                 subPath = "освещение\\напольный\\";
                 break;
-            case "настольная":
+            case "#настольная":
                 subPath = "освещение\\настольная\\";
                 break;
-            case "неон":
+            case "#неон":
                 subPath = "освещение\\неон\\";
                 break;
-            case "подвес":
+            case "#подвес":
                 subPath = "освещение\\подвес\\";
                 break;
-            case "подвесной":
+            case "#подвесной":
                 subPath = "освещение\\подвесной\\";
                 break;
-            case "потолочный":
+            case "#потолочный":
                 subPath = "освещение\\потолочный\\";
                 break;
-            case "технический":
+            case "#технический":
                 subPath = "освещение\\технический\\";
                 break;
-            case "торшеры":
+            case "#торшеры":
                 subPath = "освещение\\торшеры\\";
                 break;
-            case "точки":
+            case "#точки":
                 subPath = "освещение\\точки\\";
                 break;
-            case "треки":
+            case "#треки":
                 subPath = "освещение\\треки\\";
                 break;
-            case "уличный":
+            case "#уличный":
                 subPath = "освещение\\уличный\\";
                 break;
-            case "растения":
-                subPath = "растения\\растения\\";
-                break;
-            case "букеты":
+            case "#букеты":
                 subPath = "растения\\букеты\\";
                 break;
-            case "деревья":
+            case "#деревья":
                 subPath = "растения\\деревья\\";
                 break;
-            case "комнатныерастения":
+            case "#комнатныерастения":
                 subPath = "растения\\комнатныерастения\\";
                 break;
-            case "кусты":
+            case "#кусты":
                 subPath = "растения\\кусты\\";
                 break;
-            case "мох":
+            case "#мох":
                 subPath = "растения\\мох\\";
                 break;
-            case "сухостой":
+            case "#сухостой":
                 subPath = "растения\\сухостой\\";
                 break;
-            case "трава":
+            case "#трава":
                 subPath = "растения\\трава\\";
                 break;
-            case "уличные":
+            case "#уличные":
                 subPath = "растения\\уличные\\";
                 break;
-            case "фитостены":
+            case "#фитостены":
                 subPath = "растения\\фитостены\\";
                 break;
-            case "санузел":
-                subPath = "санузел\\санузел\\";
-                break;
-            case "баня":
+            case "#баня":
                 subPath = "санузел\\баня\\";
                 break;
-            case "биде":
+            case "#биде":
                 subPath = "санузел\\биде\\";
                 break;
-            case "ванна":
+            case "#ванна":
                 subPath = "санузел\\ванна\\";
                 break;
-            case "декордляванны":
+            case "#декордляванны":
                 subPath = "санузел\\декордляванны\\";
                 break;
-            case "душ":
+            case "#душ":
                 subPath = "санузел\\душ\\";
                 break;
-            case "душевая":
+            case "#душевая":
                 subPath = "санузел\\душевая\\";
                 break;
-            case "кнопкасмыва":
+            case "#кнопкасмыва":
                 subPath = "санузел\\кнопкасмыва\\";
                 break;
-            case "мебельдляванны":
+            case "#мебельдляванны":
                 subPath = "санузел\\мебельдляванны\\";
                 break;
-            case "полотенца":
+            case "#полотенца":
                 subPath = "санузел\\полотенца\\";
                 break;
-            case "полотенцесушитель":
+            case "#полотенцесушитель":
                 subPath = "санузел\\полотенцесушитель\\";
                 break;
-            case "прачечная":
+            case "#прачечная":
                 subPath = "санузел\\прачечная\\";
                 break;
-            case "раковина":
+            case "#раковина":
                 subPath = "санузел\\раковина\\";
                 break;
-            case "смеситель":
+            case "#смеситель":
                 subPath = "санузел\\смеситель\\";
                 break;
-            case "стиральнаямашина":
+            case "#стиральнаямашина":
                 subPath = "санузел\\стиральнаямашина\\";
                 break;
-            case "сушка":
+            case "#сушка":
                 subPath = "санузел\\сушка\\";
                 break;
-            case "трап":
+            case "#трап":
                 subPath = "санузел\\трап\\";
                 break;
-            case "умывальники":
+            case "#умывальники":
                 subPath = "санузел\\умывальники\\";
                 break;
-            case "унитаз":
+            case "#унитаз":
                 subPath = "санузел\\унитаз\\";
                 break;
-            case "фурнитурадляванной":
+            case "#фурнитурадляванной":
                 subPath = "санузел\\фурнитурадляванной\\";
                 break;
-            case "халат":
+            case "#халат":
                 subPath = "санузел\\халат\\";
                 break;
-            case "скрипты":
+            case "#скрипты":
                 subPath = "скрипты\\скрипты\\";
                 break;
-            case "текстуры":
-                subPath = "текстуры\\текстуры\\";
-                break;
-            case "hdri":
+            case "#hdri":
                 subPath = "текстуры\\HDRI\\";
                 break;
-            case "акрил":
+            case "#акрил":
                 subPath = "текстуры\\акрил\\";
                 break;
-            case "бетон":
+            case "#бетон":
                 subPath = "текстуры\\бетон\\";
                 break;
-            case "декоративнаяштукатурка":
+            case "#декоративнаяштукатурка":
                 subPath = "текстуры\\декоративнаяштукатурка\\";
                 break;
-            case "дерево":
+            case "#дерево":
                 subPath = "текстуры\\дерево\\";
                 break;
-            case "жидкость":
+            case "#жидкость":
                 subPath = "текстуры\\жидкость\\";
                 break;
-            case "камень":
+            case "#камень":
                 subPath = "текстуры\\камень\\";
                 break;
-            case "материалы":
+            case "#материалы":
                 subPath = "текстуры\\материалы\\";
                 break;
-            case "материал":
+            case "#материал":
                 subPath = "текстуры\\материалы\\";
                 break;
-            case "кафель":
+            case "#кафель":
                 subPath = "текстуры\\кафель\\";
                 break;
-            case "кирпич":
+            case "#кирпич":
                 subPath = "текстуры\\кирпич\\";
                 break;
-//            case "ковры":
-//                return "текстуры\\ковры\\";
-//                break;
-            case "кожа":
+            case "#кожа":
                 subPath = "текстуры\\кожа\\";
                 break;
-            case "ламинат":
+            case "#ламинат":
                 subPath = "текстуры\\ламинат\\";
                 break;
-            case "металл":
+            case "#металл":
                 subPath = "текстуры\\металл\\";
                 break;
-            case "обои":
+            case "#обои":
                 subPath = "текстуры\\обои\\";
                 break;
-            case "органика":
+            case "#органика":
                 subPath = "текстуры\\органика\\";
                 break;
-            case "панорама":
+            case "#панорама":
                 subPath = "текстуры\\панорама\\";
                 break;
-            case "паркет":
+            case "#паркет":
                 subPath = "текстуры\\паркет\\";
                 break;
-            case "пластик":
+            case "#пластик":
                 subPath = "текстуры\\пластик\\";
                 break;
-            case "плитка":
+            case "#плитка":
                 subPath = "текстуры\\плитка\\";
                 break;
-            case "пол":
+            case "#пол":
                 subPath = "текстуры\\пол\\";
                 break;
-            case "стекло":
+            case "#стекло":
                 subPath = "текстуры\\стекло\\";
                 break;
-            case "стены":
+            case "#стены":
                 subPath = "текстуры\\стены\\";
                 break;
-            case "ткань":
+            case "#ткань":
                 subPath = "текстуры\\ткань\\";
                 break;
-            case "разное":
+            case "#разное":
                 subPath = "текстуры\\разное\\";
                 break;
-            case "техника":
-                subPath = "техника\\техника\\";
-                break;
-            case "аудиотехника":
+            case "#аудиотехника":
                 subPath = "техника\\аудиотехника\\";
                 break;
-            case "бойлер":
+            case "#бойлер":
                 subPath = "техника\\бойлер\\";
                 break;
-            case "бытоваятехника":
+            case "#бытоваятехника":
                 subPath = "техника\\бытоваятехника\\";
                 break;
-            case "вентилятор":
+            case "#вентилятор":
                 subPath = "техника\\вентилятор\\";
                 break;
-            case "выключатели":
+            case "#выключатели":
                 subPath = "техника\\выключатели\\";
                 break;
-            case "компьютеры":
+            case "#компьютеры":
                 subPath = "техника\\компьютеры\\";
                 break;
-            case "кондиционер":
+            case "#кондиционер":
                 subPath = "техника\\кондиционер\\";
                 break;
-            case "пылесос":
+            case "#пылесос":
                 subPath = "техника\\пылесос\\";
                 break;
-            case "розетки":
+            case "#розетки":
                 subPath = "техника\\розетки\\";
                 break;
-            case "телевизор":
+            case "#телевизор":
                 subPath = "техника\\телевизор\\";
                 break;
-            case "телефон":
+            case "#телефон":
                 subPath = "техника\\телефон\\";
                 break;
-            case "электроника":
+            case "#электроника":
                 subPath = "техника\\электроника\\";
                 break;
-            case "экстерьер":
-                subPath = "экстерьер\\экстерьер\\";
-                break;
-            case "автомобиль":
+            case "#автомобиль":
                 subPath = "экстерьер\\автомобиль\\";
                 break;
-            case "барбекю":
+            case "#барбекю":
                 subPath = "экстерьер\\барбекю\\";
                 break;
-            case "бассейн":
+            case "#бассейн":
                 subPath = "экстерьер\\бассейн\\";
                 break;
-            case "брусчатка":
+            case "#брусчатка":
                 subPath = "экстерьер\\брусчатка\\";
                 break;
-            case "город":
+            case "#город":
                 subPath = "экстерьер\\город\\";
                 break;
-            case "детскаяплощадка":
+            case "#детскаяплощадка":
                 subPath = "экстерьер\\детскаяплощадка\\";
                 break;
-            case "здание":
+            case "#здание":
                 subPath = "экстерьер\\здание\\";
                 break;
-            case "кафе":
+            case "#кафе":
                 subPath = "экстерьер\\кафе\\";
                 break;
-            case "ковка":
+            case "#ковка":
                 subPath = "экстерьер\\ковка\\";
                 break;
-            case "кофейня":
+            case "#кофейня":
                 subPath = "экстерьер\\кофейня\\";
                 break;
-            case "городскаясреда":
+            case "#городскаясреда":
                 subPath = "экстерьер\\городскаяСреда\\";
                 break;
-            case "элементфасада":
+            case "#элементфасада":
                 subPath = "экстерьер\\элементФасада\\";
                 break;
-            case "деталиокружающейсреды":
+            case "#деталиокружающейсреды":
                 subPath = "экстерьер\\деталиОкружающейСреды\\";
                 break;
-            case "барбекюигриль":
+            case "#барбекюигриль":
                 subPath = "экстерьер\\барбекюИГриль\\";
                 break;
-            case "ланшафт":
+            case "#ланшафт":
                 subPath = "экстерьер\\ланшафт\\";
                 break;
-            case "ограждение":
+            case "#ограждение":
                 subPath = "экстерьер\\ограждение\\";
                 break;
-            case "сетка":
+            case "#сетка":
                 subPath = "экстерьер\\сетка\\";
                 break;
-//            case "транспорт":
-//                return "экстерьер\\транспорт\\";
-//                break;
-            case "фасад":
+            case "#фасад":
                 subPath = "экстерьер\\фасад\\";
                 break;
             default:
                 break;
         }
         return subPath;
+    }
+
+    private static String[] getHashTags(String caption) {
+        return Arrays.stream(caption.split("[ \n]"))
+                .filter(s -> s.startsWith("#"))
+                .toArray(String[]::new);
     }
 
 }

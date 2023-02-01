@@ -1,3 +1,5 @@
+package bot;
+
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.*;
@@ -14,8 +16,7 @@ import java.util.List;
 
 public class MediaBot extends TelegramLongPollingBot {
 
-    private static short successfully = 0;
-    private static short failed = 0;
+    private static short count = 0;
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -26,27 +27,28 @@ public class MediaBot extends TelegramLongPollingBot {
                     .max(Comparator.comparingInt(PhotoSize::getFileSize))
                     .orElse(photos.get(photos.size() - 1));
             String captureName = null;
+            String path = null;
             try {
                 File file = execute(new GetFile(largestPhoto.getFileId()));
                 int index = file.getFilePath().lastIndexOf(".");
                 String fileExtension = file.getFilePath().substring(index);
                 String[] captions = message.getCaption().trim().split("#");
-                captureName = captions[0].trim() + fileExtension;
+                captureName = captions[0].trim().split("[ \n]")[0].trim() + fileExtension;
                 URL url = new URL("https://api.telegram.org/file/bot" + getBotToken() + "/" + file.getFilePath());
                 ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-                String path = MyUtil.getPath(message.getCaption());
+                path = MyUtil.getPath(message.getCaption());
                 FileOutputStream fos = new FileOutputStream(path + captureName);
                 fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                 fos.write(url.openConnection().getInputStream().readAllBytes());
-                successfully++;
-                System.out.println("File downloaded successfully : " + captureName + ", count : " + successfully
+                count++;
+                System.out.println("File downloaded successfully : " + captureName + ", count : " + count
                         + ", path : " + path);
                 fos.close();
                 rbc.close();
             } catch (TelegramApiException | IOException e) {
-                failed++;
-                System.out.println("Exception occurred when downloading file : " + captureName + ", count : " + failed
-                        + ", path : " + MyUtil.getPath(message.getCaption()));
+                count++;
+                System.out.println("Exception occurred when downloading file : " + captureName + ", count : " + count
+                        + ", path : " + path);
                 e.printStackTrace();
             }
         }
