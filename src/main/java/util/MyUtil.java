@@ -27,7 +27,7 @@ public class MyUtil {
             case "#шторы":
                 subPath = "декор\\шторы\\";
                 break;
-            case "#другиепредметыинтерьера":
+            case "#другиепредметыинтерьера": case "#другиемоделиинтерьера":
                 subPath = "декор\\другиепредметыинтерьера\\";
                 break;
             case "#аффреско":
@@ -36,7 +36,7 @@ public class MyUtil {
             case "#багеты":
                 subPath = "декор\\багеты\\";
                 break;
-            case "#вазы":
+            case "#вазы": case "#ваза":
                 subPath = "декор\\вазы\\";
                 break;
             case "#декоративныйнабор":
@@ -78,7 +78,7 @@ public class MyUtil {
             case "#римскиешторы":
                 subPath = "декор\\римскиешторы\\";
                 break;
-            case "#скульптура":
+            case "#скульптура": case "#скульптуры": case "#скульпутра":
                 subPath = "декор\\скульптура\\";
                 break;
             case "#детскаямебель":
@@ -156,7 +156,7 @@ public class MyUtil {
             case "#салонкрасоты":
                 subPath = "другиемодели\\салонкрасоты\\";
                 break;
-            case "#спорт":
+            case "#спорт": case "#кронштейн":
                 subPath = "другиемодели\\спорт\\";
                 break;
             case "#транспорт":
@@ -207,7 +207,7 @@ public class MyUtil {
             case "#гардероб":
                 subPath = "мебель\\гардероб\\";
                 break;
-            case "#диван":
+            case "#диван": case "#диваны":
                 subPath = "мебель\\диван\\";
                 break;
             case "#журнальныйстол":
@@ -219,13 +219,13 @@ public class MyUtil {
             case "#консоль":
                 subPath = "мебель\\консоль\\";
                 break;
-            case "#кресло":
+            case "#кресло": case "#кресла":
                 subPath = "мебель\\кресло\\";
                 break;
             case "#кресломешок":
                 subPath = "мебель\\кресломешок\\";
                 break;
-            case "#офис":
+            case "#офис": case "#офисная":
                 subPath = "мебель\\офис\\";
                 break;
             case "#офиснаямебель":
@@ -255,25 +255,25 @@ public class MyUtil {
             case "#столстул":
                 subPath = "мебель\\столстул\\";
                 break;
-            case "#столы":
+            case "#столы": case " #стол":
                 subPath = "мебель\\столы\\";
                 break;
             case "#стул":
                 subPath = "мебель\\стул\\";
                 break;
-            case "#стулья":
+            case "#стулья": case "#стелья":
                 subPath = "мебель\\стулья\\";
                 break;
-            case "#твстенка":
+            case "#твстенка": case "#твстенкаTV":
                 subPath = "мебель\\твстенка\\";
                 break;
             case "#туалетныйстолик":
                 subPath = "мебель\\туалетныйстолик\\";
                 break;
-            case "#тумба":
+            case "#тумба": case "#тумбы":
                 subPath = "мебель\\тумба\\";
                 break;
-            case "#шкафы":
+            case "#шкафы": case "#шкаф":
                 subPath = "мебель\\шкафы\\";
                 break;
             case "#кровать":
@@ -312,7 +312,7 @@ public class MyUtil {
             case "#технический":
                 subPath = "освещение\\технический\\";
                 break;
-            case "#торшеры":
+            case "#торшеры": case "#торшер": case "#лампа":
                 subPath = "освещение\\торшеры\\";
                 break;
             case "#точки":
@@ -324,13 +324,13 @@ public class MyUtil {
             case "#уличный":
                 subPath = "освещение\\уличный\\";
                 break;
-            case "#букеты":
+            case "#букеты": case "#букет":
                 subPath = "растения\\букеты\\";
                 break;
             case "#деревья":
                 subPath = "растения\\деревья\\";
                 break;
-            case "#комнатныерастения":
+            case "#комнатныерастения": case "#комнатные":
                 subPath = "растения\\комнатныерастения\\";
                 break;
             case "#кусты":
@@ -438,7 +438,7 @@ public class MyUtil {
             case "#материалы":
                 subPath = "текстуры\\материалы\\";
                 break;
-            case "#материал":
+            case "#материал": case "#матеиал":
                 subPath = "текстуры\\материалы\\";
                 break;
             case "#кафель":
@@ -486,7 +486,7 @@ public class MyUtil {
             case "#ткань":
                 subPath = "текстуры\\ткань\\";
                 break;
-            case "#разное":
+            case "#разное": case "#раное":
                 subPath = "текстуры\\разное\\";
                 break;
             case "#аудиотехника":
@@ -567,7 +567,7 @@ public class MyUtil {
             case "#барбекюигриль":
                 subPath = "экстерьер\\барбекюИГриль\\";
                 break;
-            case "#ланшафт":
+            case "#ланшафт": case "#ландшафт":
                 subPath = "экстерьер\\ланшафт\\";
                 break;
             case "#ограждение":
