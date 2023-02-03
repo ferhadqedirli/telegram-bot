@@ -13,6 +13,11 @@ public class MyUtil {
                 path += subPath;
                 break;
             }
+            subPath = getSubPathRetry(hashTag);
+            if (subPath != null) {
+                path += subPath;
+                break;
+            }
         }
 
         return path;
@@ -578,6 +583,48 @@ public class MyUtil {
                 break;
             case "#фасад":
                 subPath = "экстерьер\\фасад\\";
+                break;
+            default:
+                break;
+        }
+        return subPath;
+    }
+
+    private static String getSubPathRetry(String hashTag) {
+        String subPath = null;
+        switch (hashTag) {
+            case "#декор":
+                subPath = "декор\\";
+                break;
+            case "#детская":
+                subPath = "детская\\";
+                break;
+            case "#другиемодели":
+                subPath = "другиемодели\\";
+                break;
+            case "#кухни":
+                subPath = "кухни\\";
+                break;
+            case "#мебель":
+                subPath = "мебель\\";
+                break;
+            case "#освещение":
+                subPath = "освещение\\";
+                break;
+            case "#растения":
+                subPath = "растения\\";
+                break;
+            case "#санузел":
+                subPath = "санузел\\";
+                break;
+            case "#текстуры":
+                subPath = "текстуры\\";
+                break;
+            case "#экстерьер":
+                subPath = "экстерьер\\";
+                break;
+            case "#техника":
+                subPath = "техника\\";
                 break;
             default:
                 break;
