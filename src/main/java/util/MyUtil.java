@@ -7,16 +7,22 @@ public class MyUtil {
         String[] hashTags = getHashTags(caption.toLowerCase());
         String path = "D:\\PRO STUDIO\\";
 
+        String subPath = null;
         for (String hashTag : hashTags) {
-            String subPath = getSubPath(hashTag);
+            subPath = getSubPath(hashTag);
             if (subPath != null) {
                 path += subPath;
                 break;
             }
-            subPath = getSubPathRetry(hashTag);
-            if (subPath != null) {
-                path += subPath;
-                break;
+        }
+
+        if (subPath == null) {
+            for (String hashTag : hashTags) {
+                subPath = getSubPathRetry(hashTag);
+                if (subPath != null) {
+                    path += subPath;
+                    break;
+                }
             }
         }
 
