@@ -13,6 +13,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class MediaBot extends TelegramLongPollingBot {
 
@@ -20,23 +21,41 @@ public class MediaBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasPhoto()) {
+        boolean isDocument = false;
+        if (update.hasMessage() && (update.getMessage().hasPhoto() || update.getMessage().hasDocument())) {
+            PhotoSize largestPhoto;
+            String fileId = null;
+            Document document = null;
             Message message = update.getMessage();
-            List<PhotoSize> photos = message.getPhoto();
-            PhotoSize largestPhoto = photos.stream()
-                    .max(Comparator.comparingInt(PhotoSize::getFileSize))
-                    .orElse(photos.get(photos.size() - 1));
+            if (update.getMessage().hasDocument()) {
+                isDocument = true;
+                document = update.getMessage().getDocument();
+                if (document.getMimeType().startsWith("image")) {
+                    fileId = document.getFileId();
+                }
+            } else {
+                List<PhotoSize> photos = message.getPhoto();
+                largestPhoto = photos.stream()
+                        .max(Comparator.comparingInt(PhotoSize::getFileSize))
+                        .orElse(photos.get(photos.size() - 1));
+                fileId = largestPhoto.getFileId();
+            }
             String captureName = null;
             String path = null;
             try {
-                File file = execute(new GetFile(largestPhoto.getFileId()));
+                File file = execute(new GetFile(Objects.requireNonNull(fileId)));
                 int index = file.getFilePath().lastIndexOf(".");
                 String fileExtension = file.getFilePath().substring(index);
-                String[] captions = message.getCaption().trim().split("#");
-                captureName = captions[0].trim().split("[ \n]")[0].trim() + fileExtension;
+                if (isDocument) {
+                    captureName = document.getFileName().trim().substring(0, index + 1) + fileExtension;
+                    path = "D:\\PRO STUDIO\\";
+                } else {
+                    String[] captions = message.getCaption().trim().split("#");
+                    captureName = captions[0].trim().split("[ \n]")[0].trim() + fileExtension;
+                    path = MyUtil.getPath(message.getCaption());
+                }
                 URL url = new URL("https://api.telegram.org/file/bot" + getBotToken() + "/" + file.getFilePath());
                 ReadableByteChannel rbc = Channels.newChannel(url.openStream());
-                path = MyUtil.getPath(message.getCaption());
                 FileOutputStream fos = new FileOutputStream(path + captureName);
                 fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
                 fos.write(url.openConnection().getInputStream().readAllBytes());
